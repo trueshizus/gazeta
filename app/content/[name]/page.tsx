@@ -12,19 +12,17 @@ type Props = {
 export default async function ContentPage({ params }: Props) {
   const { name } = await params;
   
-  // Check if the file exists in the bucket folder
+  // Construct the expected filename
+  const fileName = name.endsWith('.jpg') ? name : `${name}.jpg`;
   const bucketPath = path.join(process.cwd(), 'public/bucket');
-  const files = fs.readdirSync(bucketPath);
+  const filePath = path.join(bucketPath, fileName);
   
-  // Find the file (handle both with and without .jpg extension)
-  const fileName = files.find(file => 
-    file === name || 
-    file === `${name}.jpg` || 
-    file.replace('.jpg', '') === name
-  );
-  
-  if (!fileName) {
-    notFound();
+  // Check if file exists and get stats
+  let stats;
+  try {
+    stats = fs.statSync(filePath);
+  } catch (error) {
+    return notFound();
   }
 
   // Extract page number from filename
@@ -33,9 +31,7 @@ export default async function ContentPage({ params }: Props) {
   // Format the display name
   const displayName = fileName.replace(/\.jpg$/, '').replace(/_/g, ' ');
   
-
-  // Get file stats
-  const stats = fs.statSync(path.join(bucketPath, fileName));
+  // Get file metadata
   const fileSize = (stats.size / 1024).toFixed(2); // KB
   const lastModified = stats.mtime.toLocaleDateString();
   
