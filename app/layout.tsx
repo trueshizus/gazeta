@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
+import Panel from "./components/Panel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,15 +29,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-100 max-h-lvh h-screen p-3 flex gap-3`}
       >
-        <aside className="border border-solid bg-slate-50 border-slate-300 w-4/12 p-3 rounded-lg shadow-sm resize-x overflow-auto min-w-[200px]">
+        <Panel as="aside" className="bg-slate-50 border-slate-300 w-4/12 p-3 resize-x overflow-auto min-w-[200px]">
           <Nav />
-        </aside>
-        <main className="overflow-hidden border border-solid bg-white border-slate-300 w-6/12 rounded-lg shadow-sm resize-x overflow-auto min-w-[300px]">
+        </Panel>
+        <Panel as="main" className="bg-white border-slate-300 w-6/12 p-3 resize-x overflow-auto min-w-[300px]">
           {children}
-        </main>
-        <aside className="border border-solid bg-slate-50 border-slate-300 grow p-3 rounded-lg shadow-sm">
+        </Panel>
+        <Panel as="aside" className="bg-slate-50 border-slate-300 grow p-3">
           {/* Third column content goes here */}
-        </aside>
+        </Panel>
       </body>
     </html>
   );
