@@ -21,7 +21,7 @@ export default async function ContentPage({ params }: Props) {
   let stats;
   try {
     stats = fs.statSync(filePath);
-  } catch (error) {
+  } catch {
     return notFound();
   }
 

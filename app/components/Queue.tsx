@@ -3,7 +3,9 @@ import RadioLink from "./RadioLink";
 
 interface QueueItem {
   _id: string;
-  [key: string]: any;
+  filename: string;
+  pageNumber: number;
+  hasNotes: boolean;
 }
 
 interface QueueProps {

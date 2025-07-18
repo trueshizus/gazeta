@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { getPages } from "./lib/data";
 
 export default async function Home() {

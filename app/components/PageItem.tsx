@@ -6,7 +6,7 @@ type PageItemProps = {
   pageNumber: number;
 };
 
-export default function PageItem({ _id, filename, pageNumber }: PageItemProps) {
+export default function PageItem({ filename, pageNumber }: PageItemProps) {
   // Format the filename for better display
   const displayName = filename.replace(/\.jpg$/, '').replace(/_/g, ' ');
 
