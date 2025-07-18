@@ -26,14 +26,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased border border-solid border-zinc-950 bg-zinc-950/5 max-h-lvh h-screen p-2 overflow-hidden flex`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-100 max-h-lvh h-screen p-3 flex gap-3`}
       >
-        <aside className="border border-solid bg-zinc-950/5 border-zinc-950 has-[:focus]:border-4 basis-4/12 p-2">
+        <aside className="border border-solid bg-slate-50 border-slate-300 w-4/12 p-3 rounded-lg shadow-sm resize-x overflow-auto min-w-[200px]">
           <Nav />
         </aside>
-        <main className="overflow-hidden border border-solid bg-zinc-950/5 border-zinc-950 basis-8/12">
+        <main className="overflow-hidden border border-solid bg-white border-slate-300 w-6/12 rounded-lg shadow-sm resize-x overflow-auto min-w-[300px]">
           {children}
         </main>
+        <aside className="border border-solid bg-slate-50 border-slate-300 grow p-3 rounded-lg shadow-sm">
+          {/* Third column content goes here */}
+        </aside>
       </body>
     </html>
   );

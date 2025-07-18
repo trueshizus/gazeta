@@ -8,7 +8,7 @@ import Queue from "./Queue";
 // Component to display individual file items
 function FileItem({ filename }: { filename: string }) {
   return (
-    <div>
+    <div className="text-stone-700 text-sm">
       {filename}
     </div>
   );
@@ -17,8 +17,11 @@ function FileItem({ filename }: { filename: string }) {
 export default async function Nav() {
   const files = fs.readdirSync(path.join(process.cwd(), 'public/bucket'));
   
+  // Filter to only include .jpg files
+  const jpgFiles = files.filter(file => file.endsWith('.jpg'));
+  
   // Convert files to items with just filename and _id
-  const items = files.map(file => ({
+  const items = jpgFiles.map(file => ({
     _id: file,
     filename: file
   }));
