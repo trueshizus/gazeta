@@ -1,5 +1,6 @@
 import React from "react";
 import RadioLink from "./RadioLink";
+import Panel from "./Panel";
 
 interface QueueItem {
   _id: string;
@@ -24,12 +25,12 @@ export default function Queue<T extends QueueItem>({
   onSelectionChange 
 }: QueueProps<T>) {
   return (
-    <fieldset className="border border-solid bg-white border-slate-300 has-[:focus]:border-slate-500 has-[:focus]:border-2 p-3 h-full overflow-hidden rounded">
+    <fieldset className="h-full overflow-hidden rounded">
       <legend className="bg-slate-700 px-4 py-1 text-center text-slate-50 mx-auto rounded text-sm font-medium">
         {name}
       </legend>
 
-      <section className="border border-solid bg-slate-50 border-slate-200 has-[:focus]:border-slate-400 has-[:focus]:border-2 overflow-y-scroll h-full scrollbar rounded mt-2">
+      <Panel as="section" className="bg-slate-50 border-slate-200 has-[:focus]:border-slate-400 has-[:focus]:border-2 overflow-y-scroll h-full scrollbar rounded mt-2">
         {items.map((item) => (
           <div key={item._id}>
             <label
@@ -47,7 +48,7 @@ export default function Queue<T extends QueueItem>({
             </label>
           </div>
         ))}
-      </section>
+      </Panel>
     </fieldset>
   );
 }
