@@ -2,7 +2,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import fs from "fs";
 import path from "path";
-import MarkdownDisplay from "../../components/MarkdownDisplay";
 import Panel from "../../components/Panel";
 
 type Props = {
@@ -35,12 +34,6 @@ export default async function ContentPage({ params }: Props) {
   // Format the display name
   const displayName = fileName.replace(/\.jpg$/, '').replace(/_/g, ' ');
   
-  // Read markdown content
-  const mdPath = path.join(process.cwd(), 'public/bucket', `${fileName.replace('.jpg', '')}.md`);
-  let mdContent = '';
-  if (fs.existsSync(mdPath)) {
-    mdContent = fs.readFileSync(mdPath, 'utf-8');
-  }
 
   // Get file stats
   const stats = fs.statSync(path.join(bucketPath, fileName));
