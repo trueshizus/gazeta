@@ -1,6 +1,5 @@
 import React from "react";
 import RadioLink from "./RadioLink";
-import Panel from "./Panel";
 
 interface QueueItem {
   _id: string;
@@ -20,7 +19,7 @@ export default function Queue({ name, items, component }: QueueProps) {
         {name}
       </legend>
 
-      <Panel as="section" className="bg-slate-50 border-slate-200 has-[:focus]:border-slate-400 has-[:focus]:border-2 overflow-y-scroll h-full scrollbar rounded mt-2">
+      <section className="bg-slate-50 border border-slate-200 has-[:focus]:border-slate-400 has-[:focus]:border-2 overflow-y-scroll h-full scrollbar rounded-lg shadow-sm mt-2">
         {items.map((item) => (
           <div key={item._id}>
             <label
@@ -32,7 +31,7 @@ export default function Queue({ name, items, component }: QueueProps) {
             </label>
           </div>
         ))}
-      </Panel>
+      </section>
     </fieldset>
   );
 }

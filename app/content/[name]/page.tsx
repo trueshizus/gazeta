@@ -2,7 +2,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import fs from "fs";
 import path from "path";
-import Panel from "../../components/Panel";
 
 type Props = {
   params: Promise<{
@@ -54,7 +53,7 @@ export default async function ContentPage({ params }: Props) {
       </header>
       
       <div className="flex flex-1 overflow-hidden">
-        <Panel as="main" className="flex-1 p-4 overflow-auto bg-slate-50">
+        <main className="flex-1 p-4 overflow-auto bg-slate-50 border border-solid rounded-lg shadow-sm">
           <div className="flex justify-center">
             <Image
               src={`/bucket/${fileName}`}
@@ -65,7 +64,7 @@ export default async function ContentPage({ params }: Props) {
               priority
             />
           </div>
-        </Panel>
+        </main>
         
 
       </div>

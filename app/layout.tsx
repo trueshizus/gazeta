@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
-import Panel from "./components/Panel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,17 +28,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-100 max-h-lvh h-screen p-3 flex gap-3`}
       >
-        <Panel as="aside" className="bg-slate-50 border-slate-300 w-4/12 p-3 resize-x overflow-auto min-w-[200px]">
+        <aside className="bg-slate-50 border border-slate-300 rounded-lg shadow-sm w-4/12 p-3 resize-x overflow-auto min-w-[200px]">
           <Nav />
-        </Panel>
-        <Panel as="main" className="bg-white border-slate-300 w-6/12 p-3 resize-x overflow-auto min-w-[300px]">
+        </aside>
+        <main className="bg-white border border-slate-300 rounded-lg shadow-sm w-6/12 p-3 resize-x overflow-auto min-w-[300px]">
           {children}
-        </Panel>
-        <Panel as="aside" className="bg-slate-50 border-slate-300 grow p-3">
+        </main>
+        <aside className="bg-slate-50 border border-slate-300 rounded-lg shadow-sm grow p-3">
           <div className="text-center text-slate-400 pt-8">
             <p>Additional information panel</p>
           </div>
-        </Panel>
+        </aside>
       </body>
     </html>
   );
