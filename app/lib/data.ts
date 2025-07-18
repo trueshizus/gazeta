@@ -6,8 +6,6 @@ export type Page = {
   filename: string;
   pageNumber?: number;
   hasNotes?: boolean;
-  lastModified?: string;
-  fileSize?: number;
 };
 
 export async function getPages(): Promise<Page[]> {
@@ -17,11 +15,8 @@ export async function getPages(): Promise<Page[]> {
   // Filter to only include .jpg files
   const jpgFiles = files.filter(file => file.endsWith('.jpg'));
 
-  // Convert files to items with enhanced metadata
+  // Convert files to items with metadata
   const items = jpgFiles.map(file => {
-    // Get file stats
-    const stats = fs.statSync(path.join(bucketPath, file));
-    
     // Check if markdown notes exist for this file
     const mdPath = path.join(bucketPath, file.replace('.jpg', '.md'));
     const hasNotes = fs.existsSync(mdPath);
@@ -34,8 +29,6 @@ export async function getPages(): Promise<Page[]> {
       filename: file,
       pageNumber,
       hasNotes,
-      lastModified: stats.mtime.toISOString(),
-      fileSize: Math.round(stats.size / 1024) // Size in KB
     };
   });
 
