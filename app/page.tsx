@@ -1,13 +1,10 @@
 import Image from "next/image";
-import Nav from "./components/Nav";
 
 export default function Home() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[minmax(0,280px)_1fr_1fr] bg-purple-600">
-      <Nav />
-
-      <article className="bg-amber-600 overflow-y-auto"></article>
-      <aside className="text-left overflow-y-auto"></aside>
+    <div className="h-full p-4">
+      <h1 className="text-2xl font-bold mb-4">Welcome to Gazeta</h1>
+      <p className="text-gray-600">Select a page from the sidebar to begin reading.</p>
     </div>
   );
 }

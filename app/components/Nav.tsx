@@ -24,7 +24,7 @@ export default async function Nav() {
   }));
 
   return (
-    <nav className="bg-green-600 h-full">
+    <nav className="h-full">
       <Queue 
         name="pages" 
         items={items} 
