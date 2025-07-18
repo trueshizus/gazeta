@@ -36,7 +36,9 @@ export default function RootLayout({
           {children}
         </Panel>
         <Panel as="aside" className="bg-slate-50 border-slate-300 grow p-3">
-          {/* Third column content goes here */}
+          <div className="text-center text-slate-400 pt-8">
+            <p>Additional information panel</p>
+          </div>
         </Panel>
       </body>
     </html>
