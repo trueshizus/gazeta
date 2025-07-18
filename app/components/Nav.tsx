@@ -1,14 +1,6 @@
 import Queue from "./Queue";
 import { getPages } from "../lib/data";
-
-// Component to display individual file items
-function FileItem({ filename }: { filename: string }) {
-  return (
-    <div className="text-stone-700 text-sm">
-      {filename}
-    </div>
-  );
-}
+import PageItem from "./PageItem";
 
 export default async function Nav() {
   const items = await getPages();
@@ -16,9 +8,10 @@ export default async function Nav() {
   return (
     <nav className="h-full">
       <Queue 
-        name="pages" 
+        name="Newspaper Pages" 
         items={items} 
-        component={FileItem}
+        component={PageItem}
+        variant="compact"
       />
     </nav>
   );
