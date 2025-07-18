@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import fs from "fs";
 import path from "path";
 import MarkdownDisplay from "../../components/MarkdownDisplay";
+import Panel from "../../components/Panel";
 
 type Props = {
   params: {
@@ -28,30 +29,60 @@ export default function ContentPage({ params }: Props) {
     notFound();
   }
 
+  // Extract page number from filename
+  const pageNumber = parseInt(fileName.match(/\d+/)?.[0] || '0', 10);
+  
+  // Format the display name
+  const displayName = fileName.replace(/\.jpg$/, '').replace(/_/g, ' ');
+  
   // Read markdown content
   const mdPath = path.join(process.cwd(), 'public/bucket', `${fileName.replace('.jpg', '')}.md`);
   let mdContent = '';
   if (fs.existsSync(mdPath)) {
     mdContent = fs.readFileSync(mdPath, 'utf-8');
   }
+
+  // Get file stats
+  const stats = fs.statSync(path.join(bucketPath, fileName));
+  const fileSize = (stats.size / 1024).toFixed(2); // KB
+  const lastModified = stats.mtime.toLocaleDateString();
   
   return (
-    <div className="flex h-full bg-white">
-      <main className="flex-1 overflow-auto p-4">
-        <div className="flex justify-center">
-          <Image
-            src={`/bucket/${fileName}`}
-            alt={fileName}
-            width={800}
-            height={1000}
-            className="max-w-full h-auto border border-slate-300 rounded-lg shadow-lg"
-            priority
-          />
+    <div className="h-full flex flex-col">
+      <header className="px-6 py-4 border-b border-slate-200">
+        <h1 className="text-2xl font-bold text-slate-800">{displayName}</h1>
+        <div className="flex items-center text-sm text-slate-500 mt-1">
+          <span className="mr-3">Page {pageNumber}</span>
+          <span className="mr-3">•</span>
+          <span className="mr-3">{fileSize} KB</span>
+          <span className="mr-3">•</span>
+          <span>Last modified: {lastModified}</span>
         </div>
-      </main>
-      <aside className="w-1/3 border-l border-slate-200 p-4 overflow-auto">
-        <MarkdownDisplay content={mdContent} />
-      </aside>
+      </header>
+      
+      <div className="flex flex-1 overflow-hidden">
+        <Panel as="main" className="flex-1 p-4 overflow-auto bg-slate-50">
+          <div className="flex justify-center">
+            <Image
+              src={`/bucket/${fileName}`}
+              alt={displayName}
+              width={800}
+              height={1000}
+              className="max-w-full h-auto border border-slate-300 rounded-lg shadow-lg"
+              priority
+            />
+          </div>
+        </Panel>
+        
+        <Panel as="aside" className="w-1/3 border-l border-slate-200 p-4 overflow-auto">
+          <h2 className="text-lg font-semibold mb-3">Page Notes</h2>
+          {mdContent ? (
+            <MarkdownDisplay content={mdContent} />
+          ) : (
+            <p className="text-slate-500 italic">No additional notes available for this page.</p>
+          )}
+        </Panel>
+      </div>
     </div>
   );
 }
