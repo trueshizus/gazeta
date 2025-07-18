@@ -74,14 +74,7 @@ export default function ContentPage({ params }: Props) {
           </div>
         </Panel>
         
-        <Panel as="aside" className="w-1/3 border-l border-slate-200 p-4 overflow-auto">
-          <h2 className="text-lg font-semibold mb-3">Page Notes</h2>
-          {mdContent ? (
-            <MarkdownDisplay content={mdContent} />
-          ) : (
-            <p className="text-slate-500 italic">No additional notes available for this page.</p>
-          )}
-        </Panel>
+
       </div>
     </div>
   );
