@@ -11,7 +11,6 @@ export default async function Nav() {
         name="Newspaper Pages" 
         items={items} 
         component={PageItem}
-        variant="compact"
       />
     </nav>
   );

@@ -7,23 +7,13 @@ interface QueueItem {
   [key: string]: any;
 }
 
-interface QueueProps<T extends QueueItem> {
+interface QueueProps {
   name: string;
-  items: T[];
-  component: (props: T) => React.JSX.Element;
-  selectable?: boolean;
-  variant?: 'default' | 'compact' | 'card';
-  onSelectionChange?: (id: string) => void;
+  items: QueueItem[];
+  component: (props: QueueItem) => React.JSX.Element;
 }
 
-export default function Queue<T extends QueueItem>({ 
-  name, 
-  items, 
-  component, 
-  selectable = true, 
-  variant = 'default', 
-  onSelectionChange 
-}: QueueProps<T>) {
+export default function Queue({ name, items, component }: QueueProps) {
   return (
     <fieldset className="h-full overflow-hidden rounded">
       <legend className="bg-slate-700 px-4 py-1 text-center text-slate-50 mx-auto rounded text-sm font-medium">
@@ -37,13 +27,7 @@ export default function Queue<T extends QueueItem>({
               htmlFor={item._id}
               className="border-b border-slate-200 has-[:checked]:bg-slate-100 has-[:checked]:border-l-4 has-[:checked]:border-l-slate-600 p-3 flex flex-col hover:bg-slate-100 cursor-pointer transition-colors"
             >
-              {selectable && (
-                <RadioLink 
-                  id={item._id} 
-                  name={name} 
-                  onSelectionChange={onSelectionChange}
-                />
-              )}
+              <RadioLink id={item._id} name={name} />
               <div>{component({ ...item })}</div>
             </label>
           </div>

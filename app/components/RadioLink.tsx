@@ -5,18 +5,13 @@ import { useRouter } from "next/navigation";
 type Props = {
   id: string;
   name: string;
-  onSelectionChange?: (id: string) => void;
 };
 
-export default function RadioLink({ id, name, onSelectionChange }: Props) {
+export default function RadioLink({ id, name }: Props) {
   const router = useRouter();
 
   const handleSelection = () => {
-    if (onSelectionChange) {
-      onSelectionChange(id);
-    } else {
-      router.push(`/content/${id}`);
-    }
+    router.push(`/content/${id}`);
   };
 
   return (
