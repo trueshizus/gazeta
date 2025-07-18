@@ -6,13 +6,13 @@ import MarkdownDisplay from "../../components/MarkdownDisplay";
 import Panel from "../../components/Panel";
 
 type Props = {
-  params: {
+  params: Promise<{
     name: string;
-  };
+  }>;
 };
 
-export default function ContentPage({ params }: Props) {
-  const { name } = params;
+export default async function ContentPage({ params }: Props) {
+  const { name } = await params;
   
   // Check if the file exists in the bucket folder
   const bucketPath = path.join(process.cwd(), 'public/bucket');
