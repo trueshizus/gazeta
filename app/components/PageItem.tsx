@@ -3,14 +3,10 @@ import Image from "next/image";
 type PageItemProps = {
   _id: string;
   filename: string;
-  pageNumber?: number; // Make optional
+  pageNumber: number;
 };
 
 export default function PageItem({ _id, filename, pageNumber }: PageItemProps) {
-  // Extract page number from filename if not provided
-  const extractedPageNumber = pageNumber || 
-    parseInt(filename.match(/\d+/)?.[0] || '0', 10);
-  
   // Format the filename for better display
   const displayName = filename.replace(/\.jpg$/, '').replace(/_/g, ' ');
 
@@ -18,7 +14,7 @@ export default function PageItem({ _id, filename, pageNumber }: PageItemProps) {
     <div className="p-2 flex items-center gap-3">
       <Image
         src={`/bucket/${filename}`}
-        alt={`Gazeta page ${extractedPageNumber}`}
+        alt={`Gazeta page ${pageNumber}`}
         width={60}
         height={80}
         className="border border-gray-300 rounded shadow-sm"
@@ -27,7 +23,7 @@ export default function PageItem({ _id, filename, pageNumber }: PageItemProps) {
       />
       <div>
         <div className="text-sm font-medium text-slate-700">{displayName}</div>
-        <div className="text-xs text-slate-500">Page {extractedPageNumber}</div>
+        <div className="text-xs text-slate-500">Page {pageNumber}</div>
       </div>
     </div>
   );

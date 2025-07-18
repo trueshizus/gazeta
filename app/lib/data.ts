@@ -4,8 +4,8 @@ import path from 'path';
 export type Page = {
   _id: string;
   filename: string;
-  pageNumber?: number;
-  hasNotes?: boolean;
+  pageNumber: number;
+  hasNotes: boolean;
 };
 
 export async function getPages(): Promise<Page[]> {
@@ -33,5 +33,5 @@ export async function getPages(): Promise<Page[]> {
   });
 
   // Sort by page number
-  return items.sort((a, b) => (a.pageNumber || 0) - (b.pageNumber || 0));
+  return items.sort((a, b) => a.pageNumber - b.pageNumber);
 }
