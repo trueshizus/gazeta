@@ -110,7 +110,8 @@ Corresponding markdown files follow the pattern: `gazeta_XXX.md`
 - Shadow and border styling for depth and separation
 
 ## Development Setup
-- Uses Turbopack for development (`npm run dev --turbopack`)
+- **Package Manager**: Yarn (preferred over npm)
+- Uses Turbopack for development (`yarn dev` runs `next dev --turbopack`)
 - Standard Next.js build process
 - TypeScript configuration included
 - ESLint v9 configuration for code quality
