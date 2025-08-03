@@ -26,15 +26,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-100 max-h-lvh h-screen p-3 flex gap-3`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-100 max-h-lvh h-screen p-2 flex gap-2`}
       >
-        <aside className="bg-slate-50 border border-slate-300 rounded-lg shadow-sm w-4/12 p-3 resize-x overflow-auto min-w-[200px]">
+        <aside className="bg-slate-50 border border-slate-300 rounded-lg shadow-sm w-2/12 p-2 resize-x overflow-auto min-w-[200px]">
           <Nav />
         </aside>
-        <main className="bg-white border border-slate-300 rounded-lg shadow-sm w-6/12 p-3 resize-x overflow-auto min-w-[300px]">
+        <main className="bg-white border border-slate-300 rounded-lg shadow-sm w-5/12 p-2 resize-x overflow-auto min-w-[300px]">
           {children}
         </main>
-        <aside className="bg-slate-50 border border-slate-300 rounded-lg shadow-sm grow p-3">
+        <aside className="w-5/12 bg-slate-50 border border-slate-300 rounded-lg shadow-sm grow p-2">
           <div className="text-center text-slate-400 pt-8">
             <p>Additional information panel</p>
           </div>
