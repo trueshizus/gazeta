@@ -2,6 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import fs from "fs";
 import path from "path";
+import ParsedContent from "@/app/components/ParsedContent";
 
 type Props = {
   params: Promise<{
@@ -88,7 +89,8 @@ export default async function ContentPage({ params }: Props) {
       </main>
       
       <aside className="w-5/12 bg-slate-50 border border-slate-300 rounded-lg shadow-sm grow p-2">
-        <div className="h-full flex flex-col">
+      <ParsedContent page={fileName} />
+        {/* <div className="h-full flex flex-col">
           <header className="px-4 py-3 border-b border-slate-200">
             <h2 className="text-lg font-semibold text-slate-800">
               {hasJsonFile ? 'Parsed Content' : 'No Parsed Content'}
@@ -121,7 +123,7 @@ export default async function ContentPage({ params }: Props) {
               </div>
             )}
           </div>
-        </div>
+        </div> */}
       </aside>
     </>
   );
