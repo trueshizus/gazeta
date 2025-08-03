@@ -44,7 +44,6 @@ Instructions:
 - Extract ALL visible text accurately
 - Use semantic HTML tags: <h1>, <h2>, <p>, <ul>, <li>, <table>, etc.
 - Preserve the document structure and layout
-- Use "className" instead of "class" for React compatibility
 - Do NOT include <html>, <head>, or <body> tags
 - Do NOT wrap output in markdown code blocks
 - Return ONLY the HTML content
@@ -73,7 +72,7 @@ Return the HTML directly without any markdown formatting.`
   }
 }
 
-function createTSXComponent(htmlContent: string, pageNumber: string): string {
+function createContentFile(htmlContent: string, pageNumber: string): string {
   // Clean up the HTML content
   let cleanedHTML = htmlContent
     // Remove markdown code blocks
@@ -81,8 +80,6 @@ function createTSXComponent(htmlContent: string, pageNumber: string): string {
     .replace(/```\n?/gi, '')
     // Remove any remaining markdown
     .replace(/```[a-z]*\n?/gi, '')
-    // Convert class to className for React
-    .replace(/class=/g, 'className=')
     // Clean up malformed tags
     .trim()
 
@@ -99,22 +96,12 @@ function createTSXComponent(htmlContent: string, pageNumber: string): string {
     }
   }
 
-  return `import React from 'react'
-
-interface Gazeta${pageNumber}Props {
-  className?: string
-}
-
-export default function Gazeta${pageNumber}({ className }: Gazeta${pageNumber}Props) {
-  return (
-    <div className={className}>
-      ${cleanedHTML}
-    </div>
-  )
-}
-
-export { Gazeta${pageNumber} }
-`
+  // Return JSON format that's easy to render
+  return JSON.stringify({
+    pageNumber: parseInt(pageNumber),
+    content: cleanedHTML,
+    generatedAt: new Date().toISOString()
+  }, null, 2)
 }
 
 function deduplicateListItems(html: string): string {
@@ -147,7 +134,7 @@ async function main() {
     
     // Construct file paths
     const imagePath = path.join(process.cwd(), 'public', 'bucket', `gazeta_${page}.jpg`)
-    const outputPath = path.join(process.cwd(), `gazeta_${page}.tsx`)
+    const outputPath = path.join(process.cwd(), `gazeta_${page}.json`)
     
     // Check if image exists
     if (!fs.existsSync(imagePath)) {
@@ -160,13 +147,13 @@ async function main() {
     // Process image to HTML
     const htmlContent = await parseImageToHTML(imagePath, page)
     
-    // Create TSX component
-    const tsxContent = createTSXComponent(htmlContent, page)
+    // Create content file
+    const contentFile = createContentFile(htmlContent, page)
     
     // Save output file
-    await saveOutputFile(tsxContent, outputPath)
+    await saveOutputFile(contentFile, outputPath)
     
-    console.log(`🎉 Successfully converted gazeta_${page}.jpg to gazeta_${page}.tsx`)
+    console.log(`🎉 Successfully converted gazeta_${page}.jpg to gazeta_${page}.json`)
     
   } catch (error) {
     console.error('❌ Parse failed:', error instanceof Error ? error.message : 'Unknown error')

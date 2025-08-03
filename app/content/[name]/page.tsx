@@ -2,13 +2,18 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import fs from "fs";
 import path from "path";
-import TsxActions from "../../components/TsxActions";
 
 type Props = {
   params: Promise<{
     name: string;
   }>;
 };
+
+interface ParsedContent {
+  pageNumber: number;
+  content: string;
+  generatedAt: string;
+}
 
 export default async function ContentPage({ params }: Props) {
   const { name } = await params;
@@ -36,18 +41,19 @@ export default async function ContentPage({ params }: Props) {
   const fileSize = (stats.size / 1024).toFixed(2); // KB
   const lastModified = stats.mtime.toLocaleDateString();
   
-  // Check if TSX file exists
-  const tsxFileName = fileName.replace('.jpg', '.tsx');
-  const tsxFilePath = path.join(process.cwd(), tsxFileName);
-  const hasTsxFile = fs.existsSync(tsxFilePath);
+  // Check if JSON file exists
+  const jsonFileName = fileName.replace('.jpg', '.json');
+  const jsonFilePath = path.join(process.cwd(), jsonFileName);
+  const hasJsonFile = fs.existsSync(jsonFilePath);
   
-  // Read TSX file content if it exists
-  let tsxContent = '';
-  if (hasTsxFile) {
+  // Read JSON file content if it exists
+  let parsedContent: ParsedContent | null = null;
+  if (hasJsonFile) {
     try {
-      tsxContent = fs.readFileSync(tsxFilePath, 'utf8');
+      const jsonContent = fs.readFileSync(jsonFilePath, 'utf8');
+      parsedContent = JSON.parse(jsonContent);
     } catch (error) {
-      console.error('Error reading TSX file:', error);
+      console.error('Error reading JSON file:', error);
     }
   }
   
@@ -85,36 +91,21 @@ export default async function ContentPage({ params }: Props) {
         <div className="h-full flex flex-col">
           <header className="px-4 py-3 border-b border-slate-200">
             <h2 className="text-lg font-semibold text-slate-800">
-              {hasTsxFile ? 'Parsed Content (TSX)' : 'No TSX File Available'}
+              {hasJsonFile ? 'Parsed Content' : 'No Parsed Content'}
             </h2>
-            {hasTsxFile && (
+            {hasJsonFile && parsedContent && (
               <p className="text-sm text-slate-500 mt-1">
-                Generated from image using Qwen2.5-VL
+                Generated {new Date(parsedContent.generatedAt).toLocaleDateString()}
               </p>
             )}
           </header>
           
           <div className="flex-1 overflow-auto p-4">
-            {hasTsxFile ? (
-              <div className="space-y-4">
-                <div className="bg-white border border-slate-200 rounded-lg">
-                  <div className="px-3 py-2 bg-slate-100 border-b border-slate-200 rounded-t-lg">
-                    <span className="text-sm font-medium text-slate-700">TSX Component Code</span>
-                  </div>
-                  <pre className="p-4 text-sm text-slate-800 overflow-auto max-h-96">
-                    <code>{tsxContent}</code>
-                  </pre>
-                </div>
-                
-                <div className="mt-4">
-                  <div className="px-3 py-2 bg-slate-100 border border-slate-200 rounded-t-lg">
-                    <span className="text-sm font-medium text-slate-700">Actions</span>
-                  </div>
-                  <div className="p-4 bg-white border border-slate-200 border-t-0 rounded-b-lg">
-                    <TsxActions tsxContent={tsxContent} tsxFileName={tsxFileName} />
-                  </div>
-                </div>
-              </div>
+            {hasJsonFile && parsedContent ? (
+              <div 
+                className="prose prose-sm max-w-none"
+                dangerouslySetInnerHTML={{ __html: parsedContent.content }}
+              />
             ) : (
               <div className="text-center text-slate-500 pt-8">
                 <div className="mb-4">
@@ -122,7 +113,7 @@ export default async function ContentPage({ params }: Props) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>
-                <p className="mb-2">No TSX file found for this page.</p>
+                <p className="mb-2">No parsed content found for this page.</p>
                 <p className="text-sm">Run the parser to generate:</p>
                 <code className="text-xs bg-slate-200 px-2 py-1 rounded mt-2 inline-block">
                   bun parse --page="{pageNumber.toString().padStart(3, '0')}"
