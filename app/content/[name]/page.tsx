@@ -90,40 +90,7 @@ export default async function ContentPage({ params }: Props) {
       
       <aside className="w-5/12 bg-slate-50 border border-slate-300 rounded-lg shadow-sm grow p-2">
       <ParsedContent page={fileName} />
-        {/* <div className="h-full flex flex-col">
-          <header className="px-4 py-3 border-b border-slate-200">
-            <h2 className="text-lg font-semibold text-slate-800">
-              {hasJsonFile ? 'Parsed Content' : 'No Parsed Content'}
-            </h2>
-            {hasJsonFile && parsedContent && (
-              <p className="text-sm text-slate-500 mt-1">
-                Generated {new Date(parsedContent.generatedAt).toLocaleDateString()}
-              </p>
-            )}
-          </header>
-          
-          <div className="flex-1 overflow-auto p-4">
-            {hasJsonFile && parsedContent ? (
-              <div 
-                className="prose prose-sm max-w-none"
-                dangerouslySetInnerHTML={{ __html: parsedContent.content }}
-              />
-            ) : (
-              <div className="text-center text-slate-500 pt-8">
-                <div className="mb-4">
-                  <svg className="w-12 h-12 mx-auto text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                </div>
-                <p className="mb-2">No parsed content found for this page.</p>
-                <p className="text-sm">Run the parser to generate:</p>
-                <code className="text-xs bg-slate-200 px-2 py-1 rounded mt-2 inline-block">
-                  bun parse --page="{pageNumber.toString().padStart(3, '0')}"
-                </code>
-              </div>
-            )}
-          </div>
-        </div> */}
+
       </aside>
     </>
   );
