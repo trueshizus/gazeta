@@ -42,10 +42,10 @@ export default async function ParsedContent({ page }: { page: string }) {
         )}
       </header>
       
-      <div className="flex-1 overflow-auto p-4">
+      <div className="flex-1 overflow-auto p-4 bg-white dark:bg-gray-900">
         {hasContent && parsedData ? (
           <article 
-            className="prose prose-sm max-w-none text-slate-800"
+            className="prose prose-lg max-w-none"
             dangerouslySetInnerHTML={{ __html: parsedData.content }}
           />
         ) : (
