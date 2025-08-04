@@ -167,7 +167,7 @@ async function saveOutputFile(content: string, filename: string): Promise<void> 
 async function processSinglePage(page: string): Promise<void> {
   // Construct file paths
   const imagePath = path.join(process.cwd(), 'public', 'bucket', `gazeta_${page}.jpg`)
-  const outputPath = path.join(process.cwd(), `gazeta_${page}.json`)
+  const outputPath = path.join(process.cwd(), 'public', 'bucket', `gazeta_${page}.json`)
   
   // Check if image exists
   if (!fs.existsSync(imagePath)) {
