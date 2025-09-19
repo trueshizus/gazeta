@@ -28,7 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-stone-100 max-h-lvh h-screen p-2 flex gap-2`}
       >
-        <aside className="bg-slate-50 border border-slate-300 rounded-lg shadow-sm w-2/12 p-2 resize-x overflow-auto min-w-[200px]">
+        <aside className="bg-slate-50 border border-slate-300 rounded-lg shadow-sm w-1/12 p-2 resize-x overflow-auto min-w-[200px]">
           <Nav />
         </aside>
         {children}

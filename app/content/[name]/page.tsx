@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import fs from "fs";
 import path from "path";
 import ParsedContent from "@/app/components/ParsedContent";
+import Pipe from "@/app/components/Pipe";
 
 type Props = {
   params: Promise<{
@@ -57,41 +58,51 @@ export default async function ContentPage({ params }: Props) {
       console.error('Error reading JSON file:', error);
     }
   }
+
+  const pipes = ['pipe1', 'pipe2', 'pipe3']; // Example pipes, replace with actual data if needed
+
   
   return (
-    <>
-      <main className="bg-white border border-slate-300 rounded-lg shadow-sm w-5/12 p-2 resize-x overflow-auto min-w-[300px]">
-        <div className="h-full flex flex-col">
-          <header className="px-6 py-4 border-b border-slate-200">
-            <h1 className="text-2xl font-bold text-slate-800">{displayName}</h1>
-            <div className="flex items-center text-sm text-slate-500 mt-1">
-              <span className="mr-3">Page {pageNumber}</span>
-              <span className="mr-3">•</span>
-              <span className="mr-3">{fileSize} KB</span>
-              <span className="mr-3">•</span>
-              <span>Last modified: {lastModified}</span>
-            </div>
-          </header>
+    // <>
+    //   <main className="bg-white border border-slate-300 rounded-lg shadow-sm w-5/12 p-2 resize-x overflow-auto min-w-[300px]">
+    //     <div className="h-full flex flex-col">
+    //       <header className="px-6 py-4 border-b border-slate-200">
+    //         <h1 className="text-2xl font-bold text-slate-800">{displayName}</h1>
+    //         <div className="flex items-center text-sm text-slate-500 mt-1">
+    //           <span className="mr-3">Page {pageNumber}</span>
+    //           <span className="mr-3">•</span>
+    //           <span className="mr-3">{fileSize} KB</span>
+    //           <span className="mr-3">•</span>
+    //           <span>Last modified: {lastModified}</span>
+    //         </div>
+    //       </header>
           
-          <div className="flex-1 p-4 overflow-auto bg-slate-50">
-            <div className="flex justify-center">
-              <Image
-                src={`/bucket/${fileName}`}
-                alt={displayName}
-                width={800}
-                height={1000}
-                className="max-w-full h-auto border border-slate-300 rounded-lg shadow-lg"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      </main>
+    //       <div className="flex-1 p-4 overflow-auto bg-slate-50">
+    //         <div className="flex justify-center">
+    //           <Image
+    //             src={`/bucket/${fileName}`}
+    //             alt={displayName}
+    //             width={800}
+    //             height={1000}
+    //             className="max-w-full h-auto border border-slate-300 rounded-lg shadow-lg"
+    //             priority
+    //           />
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </main>
       
-      <aside className="w-5/12 bg-slate-50 border border-slate-300 rounded-lg shadow-sm grow p-2">
-      <ParsedContent page={fileName} />
+    //   <aside className="w-5/12 bg-slate-50 border border-slate-300 rounded-lg shadow-sm grow p-2">
+    //   <ParsedContent page={fileName} />
 
-      </aside>
-    </>
+    //   </aside>
+    // </>
+
+    <main className="bg-red-300 w-full flex gap-2">
+      {pipes.map(pipe => 
+        <Pipe key={pipe} pipe={pipe}  className="flex-1" />
+      )}
+
+    </main>
   );
 }

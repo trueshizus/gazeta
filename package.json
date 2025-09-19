@@ -10,6 +10,8 @@
     "parse": "bun run parse.ts"
   },
   "dependencies": {
+    "@huggingface/inference": "^4.6.1",
+    "commander": "^14.0.0",
     "next": "15.4.1",
     "ollama": "^0.5.16",
     "react": "19.1.0",

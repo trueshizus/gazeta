@@ -1,13 +1,25 @@
+import Pipe from "./components/Pipe";
 import { getPages } from "./lib/data";
 
 export default async function Home() {
   const pages = await getPages();
   const totalPages = pages.length;
   const pagesWithNotes = pages.filter(page => page.hasNotes).length;
+  const pipes = ['pipe1', 'pipe2', 'pipe3']; // Example pipes, replace with actual data if needed
   
   return (
-    <>
-      <main className="bg-white border border-slate-300 rounded-lg shadow-sm w-5/12 p-2 resize-x overflow-auto min-w-[300px]">
+    <main className="bg-red-300 w-full flex gap-2">
+      {pipes.map(pipe => (
+        <Pipe key={pipe} pipe={pipe} className="flex-1" />
+      ))}
+
+    </main>
+  );
+}
+
+
+
+      {/* <main className="bg-white border border-slate-300 rounded-lg shadow-sm w-5/12 p-2 resize-x overflow-auto min-w-[300px]">
         <div className="h-full p-6 flex flex-col">
           <header className="mb-6">
             <h1 className="text-3xl font-bold text-slate-800 mb-2">Welcome to Gazeta</h1>
@@ -54,7 +66,4 @@ export default async function Home() {
           <p>Welcome to Gazeta Digital Archive</p>
           <p className="text-sm mt-2">Select a page to view its content and parsed information</p>
         </div>
-      </aside>
-    </>
-  );
-}
+      </aside> */}
