@@ -1,4 +1,8 @@
-import Render from "./Pipes/Render";
+'use client';
+import { useQueryState } from "nuqs";
+import { PipeMap } from "./Pipes/config";
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
+
 
 type PipeProps = {
   pipe: string;
@@ -6,13 +10,15 @@ type PipeProps = {
   className?: string;
 };
 
-const PipeMap: Record<string, React.FC> = {
-  render: Render,
-  pipe2: () => <span>Pipe 2</span>,
-  pipe3: () => <span>Pipe 3</span>,
-};
-
-export default async function Pipe({ pipe, className }: PipeProps) {
+export default function Pipe({ pipe, className }: PipeProps) {
+    const [name, setName] = useQueryState('name')
+console.log(name);
   const PipeComponent = PipeMap[pipe];
-  return <span className={`${className} bg-amber-700`}>{PipeComponent ? <PipeComponent /> : pipe}</span>;
+  return (
+    <section className={`${className}`}>
+      
+        <PipeComponent />
+  
+    </section>
+  );
 }
