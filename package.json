@@ -7,14 +7,20 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "parse": "bun run parse.ts"
+    "parse": "bun run parse.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@huggingface/inference": "^4.6.1",
     "commander": "^14.0.0",
+    "drizzle-orm": "^0.44.5",
     "next": "15.4.1",
     "nuqs": "^2.6.0",
     "ollama": "^0.5.16",
+    "postgres": "^3.4.7",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
@@ -24,6 +30,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.4",
     "eslint": "^9",
     "eslint-config-next": "15.4.1",
     "tailwindcss": "^4",
