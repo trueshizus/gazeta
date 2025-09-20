@@ -1,6 +1,5 @@
 import Pipe from "./components/Pipe";
 import { PipeMap } from "./components/Pipes/config";
-import { getPages } from "./lib/data";
 
 export default async function Home() {
   const pipes = Object.keys(PipeMap);

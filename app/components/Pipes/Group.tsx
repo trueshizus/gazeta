@@ -1,4 +1,4 @@
-export default async function Group() {
+export default function Group() {
     return (
         <div>
             <h2>Group Pipe</h2>
