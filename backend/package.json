@@ -1,0 +1,25 @@
+{
+  "name": "gazeta-backend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Gazeta Backend - Encore Application",
+  "license": "MPL-2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "encore run",
+    "build": "encore build",
+    "test": "encore test",
+    "db:migrate": "encore db migrate",
+    "parse": "bun run parse.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.7",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "encore.dev": "^1.50.0",
+    "@huggingface/inference": "^4.6.1",
+    "commander": "^14.0.0",
+    "ollama": "^0.5.16"
+  }
+}
