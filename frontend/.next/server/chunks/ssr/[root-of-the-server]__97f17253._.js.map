@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 37, "column": 0}, "map": {"version":3,"sources":["file:///Users/shizus/projects/gazeta/frontend/app/components/RadioLink.tsx"],"sourcesContent":["\"use client\";\n\nimport { useRouter } from \"next/navigation\";\n\ntype Props = {\n  id: string;\n  name: string;\n};\n\nexport default function RadioLink({ id, name }: Props) {\n  const router = useRouter();\n\n  const handleSelection = () => {\n    router.push(`/content/${id}`);\n  };\n\n  return (\n    <input\n      id={id}\n      type=\"radio\"\n      name={name}\n      value={id}\n      onChange={handleSelection}\n      className=\"appearance-none outline-none\"\n    />\n  );\n}\n"],"names":[],"mappings":";;;;AAEA;AAFA;;;AASe,SAAS,UAAU,EAAE,EAAE,EAAE,IAAI,EAAS;IACnD,MAAM,SAAS,CAAA,GAAA,kIAAA,CAAA,YAAS,AAAD;IAEvB,MAAM,kBAAkB;QACtB,OAAO,IAAI,CAAC,CAAC,SAAS,EAAE,IAAI;IAC9B;IAEA,qBACE,8OAAC;QACC,IAAI;QACJ,MAAK;QACL,MAAM;QACN,OAAO;QACP,UAAU;QACV,WAAU;;;;;;AAGhB","debugId":null}}]
+}
